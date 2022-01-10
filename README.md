@@ -1,4 +1,4 @@
-Note that this repository has been migrated from Mike Goodwin's [original](https://github.com/mike-goodwin/owasp-threat-dragon) ,
+Note that this repository has been edited for research purposes. It was migrated from Mike Goodwin's [original](https://github.com/mike-goodwin/owasp-threat-dragon) ,
 which has the issues and pull requests from October 2015 up to June 2020.
 
 <p align="center">
