@@ -144,9 +144,9 @@ angular.module('templates', [])
     '                <div ng-if="vm.diagram.title" class="panel-heading panel-title">\n' +
     '                    <span editable-text="vm.diagram.title" ng-click="diagramTitleInput.$show()" onaftersave="vm.save()" e-form="diagramTitleInput" e-required e-placeholder="Diagram title">{{ vm.diagram.title }}</span>\n' +
     '                    <span class="pull-right" >\n' +
-    '                        <button class="btn btn-default btn-diagram-type" ng-model="vm.diagram.diagramType" ng-click="vm.updateDiagramType()" uib-btn-radio="\'STRIDE\'" >STRIDE</button>\n' +
+    '                        <button class="btn btn-default btn-diagram-type" ng-model="vm.diagram.diagramType" ng-click="vm.updateDiagramType()" uib-btn-radio="\'MRTM\'" >MRTM</button>\n' +
+    '                        <label class="btn btn-default btn-diagram-type" ng-model="vm.diagram.diagramType" ng-click="vm.updateDiagramType()" uib-btn-radio="\'STRIDE\'" >STRIDE</label>\n' +
     '                        <label class="btn btn-default btn-diagram-type" ng-model="vm.diagram.diagramType" ng-click="vm.updateDiagramType()" uib-btn-radio="\'CIA\'" >CIA</label>\n' +
-    '                        <label class="btn btn-default btn-diagram-type" ng-model="vm.diagram.diagramType" ng-click="vm.updateDiagramType()" uib-btn-radio="\'LINDDUN\'" >LINDDUN</label>\n' +
     '                    </span>\n' +
     '                </div>\n' +
     '                <div class="panel-body">\n' +
@@ -310,7 +310,7 @@ angular.module('templates', [])
     '    </div>\n' +
     '</form>\n' +
     '')
-  $templateCache.put('diagrams/LinddunEditPane.html',
+  $templateCache.put('diagrams/MrEditPane.html',
     '﻿<div>\n' +
     '    <div class="modal-header">\n' +
     '        <h3>{{parameter.heading}}<span class="pull-right" ng-if="parameter.threatTotal"> ({{parameter.threatIndex}} of {{parameter.threatTotal}})</span></h3>\n' +
@@ -331,15 +331,12 @@ angular.module('templates', [])
     '                </div>\n' +
     '            </div>\n' +
     '            <div class="form-group">\n' +
-    '                <label>LINDDUN threat type</label>\n' +
+    '                <label>Mr threat type</label>\n' +
     '                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">\n' +
-    '                    <option selected>Linkability</option>\n' +
-    '                    <option>Identifiability</option>\n' +
-    '                    <option>Non-repudiation</option>\n' +
+    '                    <option selected>Social Engineering</option>\n' +
+    '                    <option>Shoulder-surfing</option>\n' +
     '                    <option>Detectability</option>\n' +
-    '                    <option>Disclosure of information</option>\n' +
-    '                    <option>Unawareness</option>\n' +
-    '                    <option>Non-compliance</option>\n' +
+    '                    <option>Identity Theft</option>\n' +
     '                </select>\n' +
     '                <div ng-show="!threatEditForm.typeInput.$valid && threatEditForm.typeInput.$dirty">\n' +
     '                    <p>\n' +
@@ -375,6 +372,24 @@ angular.module('templates', [])
     '            <div class="form-group">\n' +
     '                <label>Description</label>\n' +
     '                <textarea name="descriptionInput" ng-model="parameter.threat.description" class="form-control" rows="5" placeholder="Detailed description of the threat"></textarea>\n' +
+    '            </div>\n' +
+    '            <div class="form-group">\n' +
+    '                <label>Suggested Mitigations</label>\n' +
+    '                <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">\n' +
+    '                    <option selected>Install Anti-virus</option>\n' +
+    '                    <option>Firewall</option>\n' +
+    '                    <option>Encryption</option>\n' +
+    '                    <option>Input sanitisation</option>\n' +
+    '                </select>\n' +
+    '                <div ng-show="!threatEditForm.typeInput.$valid && threatEditForm.typeInput.$dirty">\n' +
+    '                    <p>\n' +
+    '                        <div class="alert alert-danger" role="alert">\n' +
+    '                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\n' +
+    '                            <span class="sr-only">Error:</span>\n' +
+    '                            The threat type cannot be empty.\n' +
+    '                        </div>\n' +
+    '                    </p>\n' +
+    '                </div>\n' +
     '            </div>\n' +
     '            <div class="form-group">\n' +
     '                <label>Mitigations</label>\n' +
@@ -687,7 +702,7 @@ angular.module('templates', [])
     '                            </div>\n' +
     '                        </p>\n' +
     '                    </div>\n' +
-    '                    <div ng-show="vm.willMoveThreatModel({model: vm.threatModelEditForm.threatModelTitle.$viewValue}) && !vm.isNewModel()">                      \n' +
+    '                    <div ng-show="vm.willMoveThreatModel({model: vm.threatModelEditForm.threatModelTitle.$viewValue}) && !vm.isNewModel()"> \n' +
     '                        <p>\n' +
     '                            <div class="alert alert-info" role="alert">\n' +
     '                                <span class="fa fa-info-circle" aria-hidden="true"></span>\n' +

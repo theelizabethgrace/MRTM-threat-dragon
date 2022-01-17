@@ -56,16 +56,16 @@ function dialogs($location, $modal) {
         var template;
         if (type == null) {
             // use STRIDE for backward compatibility with models where no type given
-            template = 'diagrams/StrideEditPane.html';
+            template = 'diagrams/MrEditPane.html';
         } else if (type == 'CIA') {
             template = 'diagrams/CiaEditPane.html';
-        } else if (type == 'LINDDUN') {
-            template = 'diagrams/LinddunEditPane.html';
         } else if (type == 'STRIDE') {
             template = 'diagrams/StrideEditPane.html';
+        } else if (type == 'MRTM') {
+            template = 'diagrams/MrEditPane.html';
         } else {
             // if not recognised then default to STRIDE
-            template = 'diagrams/StrideEditPane.html';
+            template = 'diagrams/MrEditPane.html';
         }
         return template;
     }

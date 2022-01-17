@@ -123,12 +123,12 @@ function threatengine() {
   }
 
   function getModel(type) {
-    /* diagram.diagramType in 'STRIDE', 'LINDDUN', 'CIA'm*/
-    if (type == 'STRIDE' || type ==  'LINDDUN' || type == 'CIA') {
+    /* diagram.diagramType in 'MRTM', 'STRIDE', 'LINDDUN', 'CIA'm*/
+    if (type == 'MRTM' || type == 'STRIDE' || type ==  'LINDDUN' || type == 'CIA') {
       return type;
     } else {
       /* default is STRIDE if it is unrecognised */
-      return 'STRIDE';
+      return 'MRTM';
     }
   }
 
@@ -406,21 +406,29 @@ function threatengine() {
       }
     });
 
-    /* LINDDUN per element
-              L | I | N | D | D | U | N
-    ACTOR   | X | X |   |   |   | X |
-    STORE   | X | X | X | X | X |   | X
-    FLOW    | X | X | X | X | X |   | X
-    PROCESS | X | X | X | X | X |   | X
+    /* MRTM per element
+              SE | SS| D | I |
+    ACTOR   | X  | X |   |   |
+    STORE   |    |   |   | X |
+    FLOW    |  X | X |   |   |
+    PROCESS |    |   | X |   |
     */
-    /* LINDDUN Linkability */
+    /* MRTM Social Engineering */
     engine.addRule({
       conditions: {
         all: [
           {
             fact: 'diagramType',
             operator: 'equal',
-            value: 'LINDDUN'
+            value: 'MRTM'
+          }, {
+            fact: 'elementType',
+            operator: 'notEqual',
+            value: 'tm.Store'
+          }, { 
+            fact: 'elementType',
+            operator: 'notEqual',
+            value: 'tm.Process'
           }
         ]
       },
@@ -428,25 +436,33 @@ function threatengine() {
         type: '896abdef-0e7e-46ec-aeaa-b8e70c233d57',
         params: {
           ruleId: '896abdef-0e7e-46ec-aeaa-b8e70c233d57',
-          title: 'Generic threat to Linkability',
-          type: 'Linkability',
-          modelType: 'LINDDUN',
+          title: 'Generic threat to Reliability',
+          type: 'Social engineering',
+          modelType: 'MRTM',
           status: 'Open',
           severity: 'Medium',
-          description: 'A generic linkability threat',
+          description: 'A generic reliability threat',
           mitigation: 'Mitigation or prevention for the threat'
         }
       }
     });
 
-    /* LINDDUN Identifiability */
+    /* MRTM shoulder surfing */
     engine.addRule({
       conditions: {
         all: [
           {
             fact: 'diagramType',
             operator: 'equal',
-            value: 'LINDDUN'
+            value: 'MRTM'
+          }, {
+            fact: 'elementType',
+            operator: 'notEqual',
+            value: 'tm.Store'
+          }, {
+            fact: 'elementType',
+            operator: 'notEqual',
+            value: 'tm.Process'
           }
         ]
       },
@@ -454,29 +470,37 @@ function threatengine() {
         type: '9128c587-bc76-41d0-a02d-5de3b539ecc0',
         params: {
           ruleId: '9128c587-bc76-41d0-a02d-5de3b539ecc0',
-          title: 'Generic threat to Identifiability',
-          type: 'Identifiability',
-          modelType: 'LINDDUN',
+          title: 'Generic threat to Integrity',
+          type: 'Shoulder surfing',
+          modelType: 'MRTM',
           status: 'Open',
           severity: 'Medium',
-          description: 'A generic identifiability threat',
+          description: 'A generic integrity threat',
           mitigation: 'Mitigation or prevention for the threat'
         }
       }
     });
 
-    /* LINDDUN Non-repudiation */
+    /* MRTM Detectability */
     engine.addRule({
       conditions: {
         all: [
           {
             fact: 'diagramType',
             operator: 'equal',
-            value: 'LINDDUN'
+            value: 'MRTM'
           }, {
             fact: 'elementType',
             operator: 'notEqual',
             value: 'tm.Actor'
+          }, {
+            fact: 'elementType',
+            operator: 'notEqual',
+            value: 'tm.Store'
+          }, {
+            fact: 'elementType',
+            operator: 'notEqual',
+            value: 'tm.Flow'
           }
         ]
       },
@@ -484,137 +508,54 @@ function threatengine() {
         type: '74834f24-8f89-40bb-b0c6-d1fdd8b8accc',
         params: {
           ruleId: '74834f24-8f89-40bb-b0c6-d1fdd8b8accc',
-          title: 'Generic threat to Non-repudiation',
-          type: 'Non-repudiation',
-          modelType: 'LINDDUN',
-          status: 'Open',
-          severity: 'Medium',
-          description: 'A generic non-repudiation threat',
-          mitigation: 'Mitigation or prevention for the threat'
-        }
-      }
-    });
-
-    /* LINDDUN Detectability */
-    engine.addRule({
-      conditions: {
-        all: [
-          {
-            fact: 'diagramType',
-            operator: 'equal',
-            value: 'LINDDUN'
-          }, {
-            fact: 'elementType',
-            operator: 'notEqual',
-            value: 'tm.Actor'
-          }
-        ]
-      },
-      event: {
-        type: 'df43b091-9ffb-44e3-9eb9-471b9ee56d39',
-        params: {
-          ruleId: 'df43b091-9ffb-44e3-9eb9-471b9ee56d39',
-          title: 'Generic threat to Detectability',
+          title: 'Generic threat to Undectability',
           type: 'Detectability',
-          modelType: 'LINDDUN',
+          modelType: 'MRTM',
           status: 'Open',
           severity: 'Medium',
-          description: 'A generic detectability threat',
+          description: 'A generic undetectability threat',
           mitigation: 'Mitigation or prevention for the threat'
         }
       }
     });
 
-    /* LINDDUN Disclosure of information */
-    engine.addRule({
-      conditions: {
-        all: [
-          {
-            fact: 'diagramType',
-            operator: 'equal',
-            value: 'LINDDUN'
-          }, {
-            fact: 'elementType',
-            operator: 'notEqual',
-            value: 'tm.Actor'
-          }
-        ]
-      },
-      event: {
-        type: '9d576610-5c53-4f84-90c5-ec70751a339d',
-        params: {
-          ruleId: '9d576610-5c53-4f84-90c5-ec70751a339d',
-          title: 'Generic threat to Disclosure of information',
-          type: 'Disclosure of information',
-          modelType: 'LINDDUN',
-          status: 'Open',
-          severity: 'Medium',
-          description: 'A generic disclosure of information threat',
-          mitigation: 'Mitigation or prevention for the threat'
-        }
-      }
-    });
-
-    /* LINDDUN Unawareness */
-    engine.addRule({
-      conditions: {
-        all: [
-          {
-            fact: 'diagramType',
-            operator: 'equal',
-            value: 'LINDDUN'
+        /* MRTM Identity Theft */
+        engine.addRule({
+          conditions: {
+            all: [
+              {
+                fact: 'diagramType',
+                operator: 'equal',
+                value: 'MRTM'
+              }, {
+                fact: 'elementType',
+                operator: 'notEqual',
+                value: 'tm.Actor'
+              }, {
+                fact: 'elementType',
+                operator: 'notEqual',
+                value: 'tm.Flow'
+              }, {
+                fact: 'elementType',
+                operator: 'notEqual',
+                value: 'tm.Process'
+              }
+            ]
           },
-          {
-            fact: 'elementType',
-            operator: 'equal',
-            value: 'tm.Actor'
+          event: {
+            type: 'df43b091-9ffb-44e3-9eb9-471b9ee56d39',
+            params: {
+              ruleId: 'df43b091-9ffb-44e3-9eb9-471b9ee56d39',
+              title: 'Generic threat to Authorization',
+              type: 'Identity Theft',
+              modelType: 'MRTM',
+              status: 'Open',
+              severity: 'Medium',
+              description: 'A generic authorization threat',
+              mitigation: 'Mitigation or prevention for the threat'
+            }
           }
-        ]
-      },
-      event: {
-        type: '8d0993c0-9d92-4c51-99f5-6772270a7d88',
-        params: {
-          ruleId: '8d0993c0-9d92-4c51-99f5-6772270a7d88',
-          title: 'Generic threat to Unawareness',
-          type: 'Unawareness',
-          modelType: 'LINDDUN',
-          status: 'Open',
-          severity: 'Medium',
-          description: 'A generic unawareness threat',
-          mitigation: 'Mitigation or prevention for the threat'
-        }
-      }
-    });
-
-    /* LINDDUN Non-compliance */
-    engine.addRule({
-      conditions: {
-        all: [
-          {
-            fact: 'diagramType',
-            operator: 'equal',
-            value: 'LINDDUN'
-          }, {
-            fact: 'elementType',
-            operator: 'notEqual',
-            value: 'tm.Actor'
-          }
-        ]
-      },
-      event: {
-        type: '6e80d2fc-747a-4ae8-a435-acce06617139',
-        params: {
-          ruleId: '6e80d2fc-747a-4ae8-a435-acce06617139',
-          title: 'Generic threat to Non-compliance',
-          type: 'Non-compliance',
-          modelType: 'LINDDUN',
-          status: 'Open',
-          severity: 'Medium',
-          description: 'A generic non-compliance threat',
-          mitigation: 'Mitigation or prevention for the threat'
-        }
-      }
-    });
+        });  
 
   }
 

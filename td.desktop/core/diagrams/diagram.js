@@ -476,7 +476,7 @@ function diagram($scope, $document, $location, $routeParams, $timeout, dialogs, 
             vm.diagram.thumbnail = './public/content/images/thumbnail.stride.jpg';
         } else if (type == 'CIA') {
             vm.diagram.thumbnail = './public/content/images/thumbnail.cia.jpg';
-        } else if (type == 'LINDDUN') {
+        } else if (type == 'MRTM') {
             vm.diagram.thumbnail = './public/content/images/thumbnail.linddun.jpg';
         } else {
             vm.diagram.thumbnail = './public/content/images/thumbnail.stride.jpg';

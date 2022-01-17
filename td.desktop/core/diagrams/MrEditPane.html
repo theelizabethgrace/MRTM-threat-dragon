@@ -1,4 +1,4 @@
-﻿<div>
+<div>
     <div class="modal-header">
         <h3>{{parameter.heading}}<span class="pull-right" ng-if="parameter.threatTotal"> ({{parameter.threatIndex}} of {{parameter.threatTotal}})</span></h3>
     </div>
@@ -18,15 +18,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>LINDDUN threat type</label>
+                <label>MR threat type</label>
                 <select name="typeInput" class="form-control" ng-required="true" ng-model="parameter.threat.type">
-                    <option selected>Linkability</option>
-                    <option>Identifiability</option>
-                    <option>Non-repudiation</option>
+                    <option selected>Social engineering/option>
+                    <option>Shoulder-surfing</option>
                     <option>Detectability</option>
-                    <option>Disclosure of information</option>
-                    <option>Unawareness</option>
-                    <option>Non-compliance</option>
+                    <option>Identity Theft</option>
                 </select>
                 <div ng-show="!threatEditForm.typeInput.$valid && threatEditForm.typeInput.$dirty">
                     <p>
